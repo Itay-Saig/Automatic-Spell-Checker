@@ -13,8 +13,9 @@ This project applies principles from language modeling and error analysis to bui
   * [Pre-processing](#broom-pre-processing)
   * [Spell Checker Architecture](#hammer_and_wrench-spell-checker-architecture)
   * [Noisy Channel Model](#loud_sound-noisy-channel-model)
-  * [Error Tables](#clipboard-error-tables)
+  * [Error Tables](#ledger-error-tables)
   * [Language Model](#brain-language-model)
+  * [File Descriptions](#open_file_folder-file-descriptions)
   * [Usage](#computer-usage)
 
 ## :bookmark_tabs: Introduction
@@ -51,7 +52,7 @@ The spell-checking system is based on the following components:
 ## :loud_sound: Noisy Channel Model
 This model uses both the error type at the character level and the probability of word sequences to correct misspellings. The correction aims to maximize the likelihood of the full corrected sentence, considering prior word probabilities and likely character-level errors.
 
-## :clipboard: Error Tables
+## :ledger: Error Tables
 Confusion matrices based on common misspellings are used to guide corrections, which are integrated with the language model in a context-sensitive manner. The system is designed to correct up to two character-level errors in a word.
 
 ## :brain: Language Model
@@ -60,6 +61,24 @@ The `LanguageModel` (an inner class) supports:
 - Sentence generation based on learned models.
 - Smoothing for unseen n-grams.
 - Evaluation of sentence likelihood in context.
+
+## :open_file_folder: File Descriptions
+Here’s a brief explanation of the key files in this repository:
+
+#### 1. **error_tables.py**
+This file contains pre-defined confusion matrices that represent common spelling mistakes. These matrices are a key component in the noisy channel model, as they quantify the likelihood of one character being mistakenly substituted, inserted, deleted or transposed into another.
+
+#### 2. **spell_checker.py**
+This is the core file of the project. It implements the `SpellChecker` class, which combines the Noisy Channel Model with the language model and error matrices to correct spelling mistakes. It includes methods to add language models and error tables, perform spell checking and evaluate text.
+
+#### 3. **text_utils.py**
+This file contains utility functions to handle and normalize text data. It includes functions to clean, tokenize and normalize sentences, which are crucial for pre-processing input text before it is passed to the spell checker.
+
+#### 4. **main.py**
+The entry point for running the spell checker. This file provides a user-friendly interface to load the language model, error tables, and perform spell checking on input text. It demonstrates how to integrate the various components of the spell checker.
+
+#### 5. **requirements.txt**
+This file lists all the Python dependencies required to run the project. It ensures that all necessary libraries are installed for successful execution of the spell checker.
 
 ## :computer: Usage
 To use the spell checker:
